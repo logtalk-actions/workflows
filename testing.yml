@@ -20,4 +20,16 @@ jobs:
       - name: Run all tests in the application directory
         run: |
           cd "$GITHUB_WORKSPACE"
-          logtalk_tester
+          logtalk_tester -f tap -c xml
+      - name: Upload TAP report
+        uses: actions/upload-artifact@master
+        with:
+          name: tap-report
+          path: path/to/tap_report.txt
+      - name: Convert code coverage XML report to HTML
+        run: xsltproc -o path/to/coverage_report.html path/to/coverage_report.xml
+      - name: Upload code coverage report
+        uses: actions/upload-artifact@master
+        with:
+          name: code-coverage-report
+          path: path/to/coverage_report.html
