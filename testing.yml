@@ -1,0 +1,23 @@
+name: Testing
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SWI-Prolog backend
+        uses: logtalk-actions/setup-swi-prolog@master
+        with:
+          swipl-branch: stable
+          swipl-version: latest
+      - name: Install Logtalk
+        uses: logtalk-actions/setup-logtalk@master
+        with:
+          logtalk-version: 3.31.0
+      - name: Checkout Logtalk application to be tested
+        uses: actions/checkout@v1
+      - name: Run all tests in the application directory
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          logtalk_tester
