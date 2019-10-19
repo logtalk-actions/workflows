@@ -17,19 +17,19 @@ jobs:
           logtalk-version: 3.31.0
       - name: Checkout Logtalk application to be tested
         uses: actions/checkout@v1
-      - name: Run all tests in the application directory
+        with:
+          fetch-depth: 1
+      - name: Run the application tests
         run: |
-          cd "$GITHUB_WORKSPACE"
           logtalk_tester -f tap -c xml
+          xsltproc -o coverage_report.html coverage_report.xml
       - name: Upload TAP report
         uses: actions/upload-artifact@master
         with:
           name: tap-report
-          path: path/to/tap_report.txt
-      - name: Convert code coverage XML report to HTML
-        run: xsltproc -o path/to/coverage_report.html path/to/coverage_report.xml
+          path: tap_report.txt"
       - name: Upload code coverage report
         uses: actions/upload-artifact@master
         with:
           name: code-coverage-report
-          path: path/to/coverage_report.html
+          path: coverage_report.html"
