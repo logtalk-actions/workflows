@@ -5,6 +5,8 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      LOGTALKHOME: /usr/local/share/logtalk
     steps:
       - name: Install SWI-Prolog backend
         uses: logtalk-actions/setup-swi-prolog@master
@@ -18,9 +20,7 @@ jobs:
       - name: Checkout Logtalk application to be documented
         uses: actions/checkout@v1
       - name: Generate the application documentation by running its doclet
-        run: |
-          cd "$GITHUB_WORKSPACE"
-          logtalk_doclet
+        run: logtalk_doclet
       - name: Upload generated documentation
         uses: actions/upload-artifact@master
         with:
