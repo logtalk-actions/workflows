@@ -1,9 +1,9 @@
-name: Testing
+name: Coverage
 
 on: [push]
 
 jobs:
-  test:
+  coverage:
     runs-on: ubuntu-latest
     env:
       LOGTALKHOME: /usr/local/share/logtalk

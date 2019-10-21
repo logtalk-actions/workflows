@@ -1,0 +1,29 @@
+name: Doclet
+
+on: [push]
+
+jobs:
+  doclet:
+    runs-on: ubuntu-latest
+    env:
+      LOGTALKHOME: /usr/local/share/logtalk
+      LOGTALKUSER: /home/runner/logtalk
+    steps:
+      - name: Install SWI-Prolog backend
+        uses: logtalk-actions/setup-swi-prolog@master
+        with:
+          swipl-branch: stable
+          swipl-version: latest
+      - name: Install Logtalk
+        uses: logtalk-actions/setup-logtalk@master
+        with:
+          logtalk-version: 3.31.0
+      - name: Checkout Logtalk application to be documented
+        uses: actions/checkout@v1
+      - name: Generate the application documentation by running its doclet
+        run: logtalk_doclet
+      - name: Upload generated documentation
+        uses: actions/upload-artifact@master
+        with:
+          name: documentation
+          path: path/to/documentation

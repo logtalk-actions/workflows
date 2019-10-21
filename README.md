@@ -14,4 +14,8 @@ This workflow generates and uploads as a build artifact the application diagrams
 
 ##### [`documenting.yml`](https://github.com/logtalk-actions/workflows/blob/master/documenting.yml)
 
+This workflow generates HTML documentation using Sphinx making it available as a build artifact.
+
+##### [`doclet.yml`](https://github.com/logtalk-actions/workflows/blob/master/doclet.yml)
+
 This workflow runs the `logtalk_doclet` script to generate documentation assuming that the project defines a doclet.

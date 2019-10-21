@@ -3,7 +3,7 @@ name: Documenting
 on: [push]
 
 jobs:
-  test:
+  documenting:
     runs-on: ubuntu-latest
     env:
       LOGTALKHOME: /usr/local/share/logtalk
@@ -18,12 +18,20 @@ jobs:
         uses: logtalk-actions/setup-logtalk@master
         with:
           logtalk-version: 3.31.0
-      - name: Checkout Logtalk application to be documented
+      - name: Checkout Logtalk application to be tested
         uses: actions/checkout@v1
-      - name: Generate the application documentation by running its doclet
-        run: logtalk_doclet
-      - name: Upload generated documentation
+        with:
+          fetch-depth: 1
+      - name: Generate the application documentation
+        run: |
+          swilgt -g "{loader,lgtdoc(loader)},lgtdoc::directory('.')" -t halt
+          cd xml_docs
+          printf 'n\nAPI documentation\nJohn Doe\n\n\n' | lgt2rst -s -t "API documentation"
+          make html
+          cd _build/html
+          zip -r ../../../docs.zip *
+      - name: Upload documentation
         uses: actions/upload-artifact@master
         with:
-          name: documentation
-          path: path/to/documentation
+          name: docs
+          path: docs.zip
