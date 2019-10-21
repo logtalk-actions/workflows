@@ -10,7 +10,7 @@ This workflow is a variant of the `testing.yml` workflow that also publishes the
 
 ##### [`diagrams.yml`](https://github.com/logtalk-actions/workflows/blob/master/diagrams.yml)
 
-This workflow generates and uploads to gh-pages the application SVG diagrams.
+This workflow generates and uploads as a build artifact the application diagrams in SVG format.
 
 ##### [`documenting.yml`](https://github.com/logtalk-actions/workflows/blob/master/documenting.yml)
 
