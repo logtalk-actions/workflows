@@ -4,7 +4,7 @@ To use a workflow in your own repo, copy its file to the `.github/workflows` dir
 
 ##### [`testing.yml`](https://github.com/logtalk-actions/workflows/blob/master/testing.yml)
 
-This workflow runs tests and makes available a TAP report and a code coverage report as build artifacts. 
+This workflow runs tests and makes available a TAP report and a code coverage report as build artifacts. To generate instead a xUnit report, change the `logtalk_tester` option `-f tap` to `-f xunit` and `tap-report` to `xunit-report` in the upload action.
 
 ##### [`coverage.yml`](https://github.com/logtalk-actions/workflows/blob/master/coverage.yml)
 
