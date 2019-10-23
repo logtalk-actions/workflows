@@ -1,6 +1,6 @@
 # Sample workflows for Logtalk repos
 
-To use a workflow in your own repo, copy its file to the `.github/workflows` directory on your repo and edit the workflow to match your application requirements. Don't forget to sign up for the GitHub Actions beta program. See the [`demo`](https://github.com/logtalk-actions/demo) repo for usage examples of some of these workflows.
+To use a workflow in your own repo, copy its file to the `.github/workflows` directory on your repo and edit the workflow to match your application requirements, notably to choose and configure the Prolog compiler backend that you want to use. Don't forget to sign up for the GitHub Actions beta program. See the [`demo`](https://github.com/logtalk-actions/demo) repo for usage examples of some of these workflows.
 
 ##### [`testing.yml`](https://github.com/logtalk-actions/workflows/blob/master/testing.yml)
 
@@ -8,7 +8,7 @@ This workflow runs tests and makes available a TAP report and a code coverage re
 
 ##### [`coverage.yml`](https://github.com/logtalk-actions/workflows/blob/master/coverage.yml)
 
-This workflow is a variant of the `testing.yml` workflow that also publishes the code coverage report to `gh-pages`. It uses a third-party action that requires creating a personal access token. You will also need to create the `gh-pages` branch. See [https://github.com/maxheld83/ghpages](https://github.com/maxheld83/ghpages) for details.
+This workflow is a variant of the `testing.yml` workflow that also publishes the code coverage report to [GitHub Pages](https://pages.github.com/). It uses a third-party action that requires creating a personal access token. You will also need to create the `gh-pages` branch before running the workflows. See [https://github.com/maxheld83/ghpages](https://github.com/maxheld83/ghpages) for details.
 
 ##### [`diagrams.yml`](https://github.com/logtalk-actions/workflows/blob/master/diagrams.yml)
 
