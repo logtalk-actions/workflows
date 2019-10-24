@@ -1,6 +1,6 @@
 # Sample workflows for Logtalk repos
 
-To use a workflow in your own repo, copy its file to the `.github/workflows` directory on your repo and edit the workflow to match your application requirements, notably to choose and configure the Prolog compiler backend that you want to use. Don't forget to sign up for the GitHub Actions beta program. See the [`demo`](https://github.com/logtalk-actions/demo) repo for usage examples of some of these workflows.
+To use a workflow in your own repo, copy its file to the `.github/workflows` directory on your repo and edit the workflow to match your application requirements, notably to choose and configure the Prolog compiler backend that you want to use. Don't forget to sign up for the GitHub Actions beta program. See the [`demo`](https://github.com/logtalk-actions/demo) and [`spider`](https://github.com/logtalk-actions/spider) repos for usage examples of some of these workflows.
 
 ##### [`testing.yml`](https://github.com/logtalk-actions/workflows/blob/master/testing.yml)
 
@@ -21,3 +21,15 @@ This workflow generates HTML documentation using Sphinx making it available as a
 ##### [`doclet.yml`](https://github.com/logtalk-actions/workflows/blob/master/doclet.yml)
 
 This workflow runs the `logtalk_doclet` script to generate documentation assuming that the project defines a doclet.
+
+##### [`embedding.yml`](https://github.com/logtalk-actions/workflows/blob/master/embedding.yml)
+
+This workflow illustrates how to embed a Logtalk application and generate an executable. For more on embedding support see [https://github.com/LogtalkDotOrg/logtalk3/tree/master/scripts/embedding](https://github.com/LogtalkDotOrg/logtalk3/tree/master/scripts/embedding).
+
+## License
+
+This project is released under the [Apache License 2.0](LICENSE).
+
+## Current Status
+
+These workflows are in active development.
