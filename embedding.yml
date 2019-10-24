@@ -5,9 +5,6 @@ on: [push]
 jobs:
   embedding:
     runs-on: macOS-latest
-    env:
-      LOGTALKHOME: /usr/local/share/logtalk
-      LOGTALKUSER: /Users/runner/logtalk
     steps:
       - name: Install GNU Prolog backend
         uses: logtalk-actions/setup-gnu-prolog@master
@@ -21,7 +18,7 @@ jobs:
       - name: Create an executable from the "spider" text adventure game
         run: |
           mkdir ~/collect
-          $LOGTALKHOME/scripts/embedding/gprolog/gprolog_embed_logtalk.sh -c -d ~/collect -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -p ~/logtalk/paths/paths.pl
+          $LOGTALKHOME/scripts/embedding/gprolog/gprolog_embed_logtalk.sh -c -d ~/collect -l $LOGTALKUSER/examples/adventure/spider.lgt -s $LOGTALKUSER/scripts/embedding/settings-embedding-sample.lgt -p $LOGTALKUSER/paths/paths.pl
           mv ~/collect/logtalk ~/collect/spider
       - name: Upload generated documentation
         uses: actions/upload-artifact@master
