@@ -13,15 +13,15 @@ jobs:
       - name: Install Logtalk
         uses: logtalk-actions/setup-logtalk@master
         with:
-          logtalk-version: latest
+          logtalk-version: git
           logtalk-tool-dependencies: false
       - name: Create an executable from the "spider" text adventure game
         run: |
-          mkdir ~/collect
-          $LOGTALKHOME/scripts/embedding/gprolog/gprolog_embed_logtalk.sh -c -d ~/collect -l $LOGTALKUSER/examples/adventure/spider.lgt -s $LOGTALKUSER/scripts/embedding/settings-embedding-sample.lgt -p $LOGTALKUSER/paths/paths.pl
-          mv ~/collect/logtalk ~/collect/spider
-      - name: Upload generated documentation
+          mkdir collect
+          echo ":- initialization('::'(spider,start))." >> collect/init.pl
+          $LOGTALKHOME/scripts/embedding/gprolog/gprolog_embed_logtalk.sh -c -d $GITHUB_WORKSPACE/collect -n spider -l $LOGTALKUSER/examples/adventure/spider.lgt -s $LOGTALKUSER/scripts/embedding/settings-embedding-sample.lgt -p $LOGTALKUSER/paths/paths.pl -- --strip --no-top-level $GITHUB_WORKSPACE/collect/init.pl
+      - name: Upload executable
         uses: actions/upload-artifact@master
         with:
           name: spider
-          path: /Users/runner/collect/spider
+          path: collect/spider
