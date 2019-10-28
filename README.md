@@ -6,6 +6,10 @@ To use a workflow in your own repo, copy its file to the `.github/workflows` dir
 
 This workflow runs tests and makes available a TAP report and a code coverage report as build artifacts. To generate instead a xUnit report, change the `logtalk_tester` option `-f tap` to `-f xunit` and `tap-report` to `xunit-report` in the upload action.
 
+##### [`testing_for_pull_requests`](https://github.com/logtalk-actions/workflows/blob/master/testing_for_pull_requests.yml)
+
+This workflow run tests on pull requests without generating any reports. It also uses a minimal Logtalk setup without installing third-party dependencies, which are not required in this case.
+
 ##### [`coverage.yml`](https://github.com/logtalk-actions/workflows/blob/master/coverage.yml)
 
 This workflow is a variant of the `testing.yml` workflow that also publishes the code coverage report to [GitHub Pages](https://pages.github.com/). It uses a third-party action that requires creating a personal access token. You will also need to create the `gh-pages` branch before running the workflows. See [https://github.com/maxheld83/ghpages](https://github.com/maxheld83/ghpages) for details.

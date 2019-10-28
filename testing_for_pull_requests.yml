@@ -1,0 +1,23 @@
+name: Testing
+
+on: pull_request
+
+jobs:
+  test:
+    runs-on: macOS-latest
+    steps:
+      - name: Install GNU Prolog backend
+        uses: logtalk-actions/setup-gnu-prolog@master
+        with:
+          gprolog-version: latest
+      - name: Install Logtalk
+        uses: logtalk-actions/setup-logtalk@master
+        with:
+          logtalk-version: latest
+          logtalk-tool-dependencies: false
+      - name: Checkout Logtalk application to be tested
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Run the application tests
+        run: logtalk_tester
