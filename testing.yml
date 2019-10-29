@@ -14,22 +14,27 @@ jobs:
       - name: Install Logtalk
         uses: logtalk-actions/setup-logtalk@master
         with:
-          logtalk-version: 3.31.0
+          logtalk-version: latest
       - name: Checkout Logtalk application to be tested
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
+      - name: Define environment variable for workflow exit
+        run: echo "::set-env name=EXIT::0"
       - name: Run the application tests
         run: |
-          logtalk_tester -f tap -c xml
+          logtalk_tester -f xunit -c xml || EXIT=$?
+          xunit-viewer --results=xunit_report.xml --output=xunit_report.html
           xsltproc --stringparam prefix work/$(basename $GITHUB_REPOSITORY)/$(basename $GITHUB_REPOSITORY)/ --stringparam url https://github.com/$GITHUB_REPOSITORY/tree/$GITHUB_SHA -o coverage_report.html coverage_report.xml
-      - name: Upload TAP report
+      - name: Upload xUnit report
         uses: actions/upload-artifact@master
         with:
-          name: tap-report
-          path: tap_report.txt
+          name: xunit-report
+          path: xunit_report.html
       - name: Upload code coverage report
         uses: actions/upload-artifact@master
         with:
           name: code-coverage-report
           path: coverage_report.html
+      - name: Set workflow exit status after the test results
+        run: exit $EXIT
