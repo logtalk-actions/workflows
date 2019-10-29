@@ -9,7 +9,7 @@ jobs:
       - name: Install GNU Prolog backend
         uses: logtalk-actions/setup-gnu-prolog@master
         with:
-          gprolog-version: latest
+          gnu-prolog-version: latest
       - name: Install Logtalk
         uses: logtalk-actions/setup-logtalk@master
         with:
