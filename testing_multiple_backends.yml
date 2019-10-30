@@ -1,0 +1,49 @@
+name: Testing
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        backend: [eclipse, swi-prolog]
+    steps:
+      - if: matrix.backend == 'eclipse'
+        name: Install backend
+        uses: logtalk-actions/setup-eclipse@master
+        with:
+          eclipse-version: '7.0_50'
+      - if: matrix.backend == 'swi-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-swi-prolog@master
+        with:
+          swi-prolog-version: latest
+      - name: Install Logtalk
+        uses: logtalk-actions/setup-logtalk@master
+        with:
+          logtalk-version: git
+      - name: Checkout Logtalk application to be tested
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Define environment variable for the test results
+        run: echo "::set-env name=EXIT::0"
+      - name: Run the application tests
+        run: |
+          logtalk_tester -p ${{ matrix.backend }} -f xunit -c xml || EXIT=$?
+          xunit-viewer --results=xunit_report.xml --output=xunit_report.html
+          xsltproc --stringparam prefix work/$(basename $GITHUB_REPOSITORY)/$(basename $GITHUB_REPOSITORY)/ --stringparam url https://github.com/$GITHUB_REPOSITORY/tree/$GITHUB_SHA -o coverage_report.html coverage_report.xml
+      - name: Upload xUnit report
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ matrix.backend }}-xunit-report
+          path: xunit_report.html
+      - name: Upload code coverage report
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ matrix.backend }}-code-coverage-report
+          path: coverage_report.html
+      - name: Set workflow exit status after the test results
+        run: exit $EXIT
