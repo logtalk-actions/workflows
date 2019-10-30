@@ -6,7 +6,7 @@ To use a workflow in your own repo, copy its file to the `.github/workflows` dir
 
 This workflow runs tests on push events and makes available a TAP report and a code coverage report as build artifacts. To generate instead a xUnit report, change the `logtalk_tester` option `-f tap` to `-f xunit` and `tap-report` to `xunit-report` in the upload action.
 
-##### [`testing_for_pull_requests.yml`](testing_for_pull_requests.yml)
+##### [`testing_pull_requests.yml`](testing_pull_requests.yml)
 
 This workflow run tests on pull request events without generating any reports. It also uses a minimal Logtalk setup without installing third-party dependencies, which are not required in this case. Merging the pull request requires this workflow to succeed.
 
