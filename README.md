@@ -34,6 +34,10 @@ This workflow runs on push events and calls the `logtalk_doclet` script to gener
 
 This workflow runs on push events and illustrates how to embed a Logtalk application and generate an executable. For more on embedding support see [https://github.com/LogtalkDotOrg/logtalk3/tree/master/scripts/embedding](https://github.com/LogtalkDotOrg/logtalk3/tree/master/scripts/embedding).
 
+## Contributing
+
+Contributions are most welcome. Contributors are expected to uphold the [code of conduct](CODE_OF_CONDUCT.md).
+
 ## License
 
 This project is released under the [Apache License 2.0](LICENSE).

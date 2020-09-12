@@ -14,7 +14,7 @@ jobs:
         name: Install backend
         uses: logtalk-actions/setup-eclipse@master
         with:
-          eclipse-version: '7.0_50'
+          eclipse-version: '7.0_54'
       - if: matrix.backend == 'swi-prolog'
         name: Install backend
         uses: logtalk-actions/setup-swi-prolog@master
