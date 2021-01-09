@@ -1,6 +1,6 @@
 # Sample workflows for Logtalk repos
 
-To use a workflow in your own repo, copy its file to the `.github/workflows` directory on your repo and edit the workflow to match your application requirements, notably to choose and configure the Prolog compiler backend that you want to use. Don't forget to enable, if necessary, GitHub Actions](https://help.github.com/en/github/automating-your-workflow-with-github-actions/about-github-actions) for your repo. See the [`demo`](https://github.com/logtalk-actions/demo) and [`spider`](https://github.com/logtalk-actions/spider) repos for usage examples of some of these workflows.
+To use a workflow in your own repo, copy its file to the `.github/workflows` directory on your repo and edit the workflow to match your application requirements, notably to choose and configure the Prolog compiler backend that you want to use. Don't forget to enable, if necessary, [GitHub Actions](https://help.github.com/en/github/automating-your-workflow-with-github-actions/about-github-actions) for your repo. See the [`demo`](https://github.com/logtalk-actions/demo) and [`spider`](https://github.com/logtalk-actions/spider) repos for usage examples of some of these workflows.
 
 ##### [`compliance.yml`](compliance.yml)
 
