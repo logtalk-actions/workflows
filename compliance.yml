@@ -1,0 +1,21 @@
+name: Compliance
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SWI-Prolog backend
+        uses: logtalk-actions/setup-swi-prolog@master
+        with:
+          swi-prolog-branch: stable
+          swi-prolog-version: latest
+      - name: Install Logtalk
+        uses: logtalk-actions/setup-logtalk@master
+        with:
+          logtalk-version: git
+      - name: Run the Prolog standards compliance test suite
+        run: |
+          cd "$LOGTALKUSER/tests/prolog" 
+          logtalk_tester -p swi -t 180
