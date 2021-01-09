@@ -15,6 +15,7 @@ jobs:
         uses: logtalk-actions/setup-logtalk@master
         with:
           logtalk-version: git
+          logtalk-tool-dependencies: false
       - name: Run the Prolog standards compliance test suite
         run: |
           cd "$LOGTALKUSER/tests/prolog" 
