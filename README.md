@@ -6,6 +6,10 @@ To use a workflow in your own repo, copy its file to the `.github/workflows` dir
 
 This workflow runs the Prolog standards compliance test suite bundled with Logtalk. After copying it, edit the backend Prolog system and the Logtalk version to use plus the required `logtalk_tester` script options.
 
+##### [`compliance_plus_allure_report.yml`](compliance_plus_allure_report.yml)
+
+Same as the `compliance.yml` workflow but also creates an [Allure](http://allure.qatools.ru) report with the test results for easy browsing. The report is uploaded to the `gh-pages` branch for automatic publishing using GitHub Pages.
+
 ##### [`testing.yml`](testing.yml)
 
 This workflow runs tests on push events and makes available a TAP report and a code coverage report as build artifacts. To generate instead a xUnit report, change the `logtalk_tester` option `-f tap` to `-f xunit` and `tap-report` to `xunit-report` in the upload action.

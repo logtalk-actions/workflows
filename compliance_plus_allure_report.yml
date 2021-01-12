@@ -1,0 +1,44 @@
+name: Compliance
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SWI-Prolog backend
+        uses: logtalk-actions/setup-swi-prolog@master
+        with:
+          swi-prolog-branch: stable
+          swi-prolog-version: latest
+      - name: Install Logtalk
+        uses: logtalk-actions/setup-logtalk@master
+        with:
+          logtalk-version: git
+          logtalk-tool-dependencies: false
+      - name: Install Allure
+        run: |
+          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.13.8/allure-commandline-2.13.8.zip
+          unzip allure-commandline-2.13.8.zip
+          cd allure-2.13.8/bin
+          sudo ln -s "$PWD/allure" /usr/local/bin/allure
+          allure --version
+      - name: Define environment variable for the test results
+        run: echo "EXIT=0" >> $GITHUB_ENV
+      - name: Run the Prolog standards compliance test suite
+        run: |
+          cd "$LOGTALKUSER/tests/prolog" 
+          logtalk_tester -p swi -g "set_logtalk_flag(clean,off)" -t 120 -f xunit -w || EXIT=$?
+          echo "EXIT=$EXIT" >> $GITHUB_ENV
+      - name: Create Allure report
+        run: |
+          cd "$LOGTALKUSER/tests/prolog"
+          logtalk_allure_report
+          mv allure-report $GITHUB_WORKSPACE/
+      - name: Upload Allure report
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+      - name: Set workflow exit status after the test results
+        run: exit $EXIT
