@@ -35,6 +35,7 @@ jobs:
           logtalk_tester -p ${{ matrix.backend }} -f xunit -c xml || EXIT=$?
           xunit-viewer --results=xunit_report.xml --output=xunit_report.html
           xsltproc --stringparam prefix work/$(basename $GITHUB_REPOSITORY)/$(basename $GITHUB_REPOSITORY)/ --stringparam url https://github.com/$GITHUB_REPOSITORY/tree/$GITHUB_SHA -o coverage_report.html coverage_report.xml
+          echo "EXIT=$EXIT" >> $GITHUB_ENV
       - name: Upload xUnit report
         uses: actions/upload-artifact@master
         with:
