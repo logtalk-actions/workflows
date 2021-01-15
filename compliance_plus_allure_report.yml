@@ -33,7 +33,7 @@ jobs:
       - name: Create Allure report
         run: |
           cd "$LOGTALKUSER/tests/prolog"
-          logtalk_allure_report
+          logtalk_allure_report -- Backend='SWI-Prolog' Commit=$GITHUB_SHA
           mv allure-report $GITHUB_WORKSPACE/
       - name: Upload Allure report
         uses: peaceiris/actions-gh-pages@v3
