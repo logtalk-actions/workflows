@@ -28,7 +28,7 @@ jobs:
       - name: Run the Prolog standards compliance test suite
         run: |
           cd "$LOGTALKUSER/tests/prolog" 
-          logtalk_tester -p swi -g "set_logtalk_flag(clean,off)" -t 120 -f xunit -w || EXIT=$?
+          logtalk_tester -p swi -g "set_logtalk_flag(clean,off)" -t 120 -f xunit -s "$HOME/logtalk/tests/prolog/" -w || EXIT=$?
           echo "EXIT=$EXIT" >> $GITHUB_ENV
       - name: Create Allure report
         run: |
