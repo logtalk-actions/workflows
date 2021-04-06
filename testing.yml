@@ -23,7 +23,7 @@ jobs:
         run: echo "::set-env name=EXIT::0"
       - name: Run the application tests
         run: |
-          logtalk_tester -f xunit -c xml || EXIT=$?
+          logtalk_tester -p swi -f xunit -c xml || EXIT=$?
           xunit-viewer --results=xunit_report.xml --output=xunit_report.html
           xsltproc --stringparam prefix work/$(basename $GITHUB_REPOSITORY)/$(basename $GITHUB_REPOSITORY)/ --stringparam url https://github.com/$GITHUB_REPOSITORY/tree/$GITHUB_SHA -o coverage_report.html coverage_report.xml
           echo "EXIT=$EXIT" >> $GITHUB_ENV
