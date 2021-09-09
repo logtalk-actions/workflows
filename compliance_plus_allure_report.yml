@@ -1,4 +1,4 @@
-name: Compliance
+name: Standards compliance
 
 on: [push]
 
@@ -18,17 +18,19 @@ jobs:
           logtalk-tool-dependencies: false
       - name: Install Allure
         run: |
-          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.13.8/allure-commandline-2.13.8.zip
-          unzip allure-commandline-2.13.8.zip
-          cd allure-2.13.8/bin
+          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.14.0/allure-commandline-2.14.0.zip
+          unzip allure-commandline-2.14.0.zip
+          cd allure-2.14.0/bin
           sudo ln -s "$PWD/allure" /usr/local/bin/allure
           allure --version
       - name: Define environment variable for the test results
-        run: echo "EXIT=0" >> $GITHUB_ENV
+        run: |
+          echo "EXIT=0" >> $GITHUB_ENV
+          echo "LOGTALK_GIT_HASH=`git ls-remote https://github.com/LogtalkDotOrg/logtalk3 HEAD | cut -f1`" >> $GITHUB_ENV
       - name: Run the Prolog standards compliance test suite
         run: |
           cd "$LOGTALKUSER/tests/prolog" 
-          logtalk_tester -p swi -g "set_logtalk_flag(clean,off)" -t 120 -f xunit -s "$HOME/logtalk/tests/prolog/" -w || EXIT=$?
+          logtalk_tester -p swi -g "set_logtalk_flag(clean,off)" -t 120 -f xunit_net_v2 -s "$HOME/logtalk/tests/prolog/" -u "https://github.com/LogtalkDotOrg/logtalk3/tree/$LOGTALK_GIT_HASH/tests/prolog/" -w || EXIT=$?
           echo "EXIT=$EXIT" >> $GITHUB_ENV
       - name: Create Allure report
         run: |
