@@ -29,7 +29,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: Define environment variable for the test results
-        run: echo "::set-env name=EXIT::0"
+        run: echo "EXIT=0" >> $GITHUB_ENV
       - name: Run the application tests
         run: |
           logtalk_tester -p ${{ matrix.backend }} -f xunit -c xml || EXIT=$?
