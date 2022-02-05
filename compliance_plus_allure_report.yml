@@ -18,9 +18,9 @@ jobs:
           logtalk-tool-dependencies: false
       - name: Install Allure
         run: |
-          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.14.0/allure-commandline-2.14.0.zip
-          unzip allure-commandline-2.14.0.zip
-          cd allure-2.14.0/bin
+          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.2/allure-commandline-2.17.2.zip
+          unzip allure-commandline-2.17.2.zip
+          cd allure-2.17.2/bin
           sudo ln -s "$PWD/allure" /usr/local/bin/allure
           allure --version
       - name: Define environment variable for the test results
